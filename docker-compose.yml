@@ -1,0 +1,65 @@
+version: '3'
+services:
+    postgresdb:
+      container_name: postgresdb
+      image: postgres:latest
+      restart: always
+      environment:
+        - DATABASE_HOST=127.0.0.1
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=tutu
+        - POSTGRES_DB=cliente
+      volumes:
+        - ./pgdata:/var/lib/postgresql/data
+      ports:
+        - "5432:5432"
+      networks:
+        - mynetwork
+
+    pgadmin:
+      image: dpage/pgadmin4
+      restart: always
+      environment:
+        PGADMIN_DEFAULT_EMAIL: edwin@admin.com
+        PGADMIN_DEFAULT_PASSWORD: tutuZ1592
+      ports:
+        - 5050:80
+      depends_on:
+        - postgresdb
+      networks:
+        - mynetwork
+
+
+
+    jaegerfull:
+      image: jaegertracing/all-in-one:1.25
+      ports:
+        - 6831:6831/udp
+        - 6832:6832/udp
+        - 16686:16686
+        - 14268:14268
+      depends_on:
+        - postgresdb
+      networks:
+        - mynetwork
+
+
+    app:
+      depends_on:
+        - postgresdb
+        - jaegerfull
+      container_name: spring-app
+      image: pee-java-app:1.0.0
+      build: .
+      ports:
+        - 8080:8080
+      environment:
+        - DATABASE_URL=jdbc:postgresql://postgresdb:5432/cliente
+        - DATABASE_USERNAME=postgres
+        - DATABASE_PASSWORD=tutu
+        - JAEGER_HTTP_SENDER_URL=http://jaegerfull:14268/api/traces  # Utilizar el nombre del servicio
+      networks:
+        - mynetwork
+
+networks:
+  mynetwork:
