@@ -56,17 +56,17 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>io.opentracing.contrib</groupId>
-			<artifactId>opentracing-spring-jaeger-cloud-starter</artifactId>
-			<version>3.3.1</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/io.jaegertracing/jaeger-core -->
-		<dependency>
-			<groupId>io.jaegertracing</groupId>
-			<artifactId>jaeger-core</artifactId>
-			<version>1.8.1</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.opentracing.contrib</groupId>-->
+<!--			<artifactId>opentracing-spring-jaeger-cloud-starter</artifactId>-->
+<!--			<version>3.3.1</version>-->
+<!--		</dependency>-->
+<!--		&lt;!&ndash; https://mvnrepository.com/artifact/io.jaegertracing/jaeger-core &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>io.jaegertracing</groupId>-->
+<!--			<artifactId>jaeger-core</artifactId>-->
+<!--			<version>1.8.1</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>io.springfox</groupId>
